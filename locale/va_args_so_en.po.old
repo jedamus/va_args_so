@@ -1,0 +1,19 @@
+#: main.c:59
+#, fuzzy, c-format
+msgid "%s V%s (C) %s by %s <%s>\n"
+msgstr "%s V%s (C) 2024 by Leander Jedamus\n"
+
+#: main.c:69
+#, c-format
+msgid "Enter a number: "
+msgstr "Enter a number: "
+
+#: main.c:71
+#, c-format
+msgid "Input error.\n"
+msgstr "Input error.\n"
+
+#: main.c:82
+#, c-format
+msgid "Please press 'q' to end program!\n"
+msgstr "Please press 'q' to end program!\n"
