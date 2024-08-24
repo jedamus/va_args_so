@@ -1,5 +1,5 @@
 # erzeugt Samstag, 04. Juli 2015 14:04 (C) 2015 von Leander Jedamus
-# modifiziert Samstag, 24. August 2024 14:31 von Leander Jedamus
+# modifiziert Samstag, 24. August 2024 14:42 von Leander Jedamus
 # modifiziert Freitag, 16. August 2024 12:06 von Leander Jedamus
 # modifiziert Montag, 12. August 2024 09:41 von Leander Jedamus
 # modifiziert Dienstag, 06. August 2024 14:52 von Leander Jedamus
@@ -197,8 +197,8 @@ FILES			+= distclean.sh
 FILES			+= zip.sh
 FILES			+= create_project.sh
 FILES			+= create_version.sh
-FILES			+= project.txt project.h
-FILES			+= version.txt version.h
+FILES			+= project.txt
+FILES			+= version.txt
 FILES			+= author.txt email.txt years.txt
 
 # use this for your c++ source files (uncomment for use with your c++-file):
