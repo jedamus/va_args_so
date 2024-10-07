@@ -1,5 +1,5 @@
 # erzeugt Samstag, 04. Juli 2015 14:04 (C) 2015 von Leander Jedamus
-# modifiziert Montag, 07. Oktober 2024 18:33 von Leander Jedamus
+# modifiziert Montag, 07. Oktober 2024 19:01 von Leander Jedamus
 # modifiziert Samstag, 24. August 2024 14:42 von Leander Jedamus
 # modifiziert Freitag, 16. August 2024 12:06 von Leander Jedamus
 # modifiziert Montag, 12. August 2024 09:41 von Leander Jedamus
@@ -272,7 +272,7 @@ HLIB1FILES		+= $(CLIB1FILES:%.c=%.h)
 FILES			+= $(HLIB1FILES)
 FILES			+= $(CLIB1FILES2)
 FILES			+= $(CLIB1FILES2:%.c=%.h)
-LIBRARY1NAME		:= subs
+LIBRARY1NAME		:= subs_so
 LIB1OBJ			:= lib$(LIBRARY1NAME).o
 IS_IN_LIB		:= $(CLIB1FILES:%.c=%.d)
 

@@ -1,7 +1,7 @@
 /* -*- C -*- */
 /* args.c */
 /* erzeugt Freitag, 07. Juli 2023 12:05 (C) 2023 von Leander Jedamus */
-/* modifiziert Montag, 07. Oktober 2024 11:18 von Leander Jedamus */
+/* modifiziert Montag, 07. Oktober 2024 18:48 von Leander Jedamus */
 /* modifiziert Freitag, 23. Februar 2024 07:51 von Leander Jedamus */
 /* modifiziert Donnerstag, 22. Februar 2024 17:44 von Leander Jedamus */
 /* modifiziert Montag, 25. September 2023 07:39 von Leander Jedamus */
