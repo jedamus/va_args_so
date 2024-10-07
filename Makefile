@@ -1,5 +1,5 @@
 # erzeugt Samstag, 04. Juli 2015 14:04 (C) 2015 von Leander Jedamus
-# modifiziert Montag, 07. Oktober 2024 12:05 von Leander Jedamus
+# modifiziert Montag, 07. Oktober 2024 18:33 von Leander Jedamus
 # modifiziert Samstag, 24. August 2024 14:42 von Leander Jedamus
 # modifiziert Freitag, 16. August 2024 12:06 von Leander Jedamus
 # modifiziert Montag, 12. August 2024 09:41 von Leander Jedamus
@@ -281,13 +281,13 @@ LOADLIBES		:= -l$(LIBRARY1NAME)
 ifeq ($(link_switch),static)
   LIBRARY12		:= lib$(LIBRARY1NAME).so
   LIBRARIES12		:= $(LIBRARY12)
-  LIB1OBJS1		:= $(CLIB1FILES:%.c=%.oo)
-  LIB1OBJS13		:= $(CLIB1FILES2:%.c=%.oo)
+  LIB1OBJS1		:= $(CLIB1FILES:%.c=%.ol)
+  LIB1OBJS13		:= $(CLIB1FILES2:%.c=%.ol)
   OBJS1			:= $(LIB1OBJS1)
   LIBRARY1		:= lib$(LIBRARY1NAME).a
   LIBRARIES1		:= $(LIBRARY1)
-  LIB1OBJS12		:= $(CLIB1FILES:%.c=%.o++)
-  LIB1OBJS12		+= $(CLIB1FILES2:%.c=%.o++)
+  LIB1OBJS12		:= $(CLIB1FILES:%.c=%.osl)
+  LIB1OBJS12		+= $(CLIB1FILES2:%.c=%.osl)
   LIB1OBJS		:= $(LIB1OBJS1)
 ifeq ($(machtype),Linux)
   LIB1OBJS		+= $(LIB1OBJS13)
@@ -304,13 +304,13 @@ endif
 else
   LIBRARY12		:= lib$(LIBRARY1NAME).a
   LIBRARIES12		:= $(LIBRARY12)
-  LIB1OBJS1		:= $(CLIB1FILES:%.c=%.o++)
-  LIB1OBJS13		+= $(CLIB1FILES2:%.c=%.o++)
+  LIB1OBJS1		:= $(CLIB1FILES:%.c=%.osl)
+  LIB1OBJS13		+= $(CLIB1FILES2:%.c=%.osl)
   OBJS1			:= $(LIB1OBJS1)
   LIBRARY1		:= lib$(LIBRARY1NAME).so
   LIBRARIES1		:= $(LIBRARY1)
-  LIB1OBJS12		:= $(CLIB1FILES:%.c=%.oo)
-  LIB1OBJS12		+= $(CLIB1FILES2:%.c=%.oo)
+  LIB1OBJS12		:= $(CLIB1FILES:%.c=%.ol)
+  LIB1OBJS12		+= $(CLIB1FILES2:%.c=%.ol)
   LIB1OBJS		:= $(LIB1OBJS1)
 ifeq ($(machtype),Linux)
   LIB1OBJS		+= $(LIB1OBJS13)
@@ -335,8 +335,8 @@ MAINOBJS		:= $(CMAINFILE:%.c=%.o)
 OBJS			+= $(MAINOBJS)
 
 CLEAN			= $(strip $(filter %.o,$(OBJS)) \
-		            $(filter %.o++,$(OBJS)) \
-		            $(filter %.oo,$(OBJS)) \
+		            $(filter %.osl,$(OBJS)) \
+		            $(filter %.ol,$(OBJS)) \
 			    $(LIBRARIES) $(PROGRAMS) \
 			   )
 
@@ -402,9 +402,9 @@ $(PROGRAM1):		$(CDEPENDS) $(LIBRARY1) $(MAINOBJS)
 
 $(LIBRARY1):		$(LIB1OBJS)
 ifeq ($(link_switch),static)
-			$(archive)
+			$(static_library)
 else
-			$(dynamic_link.o)
+			$(dynamic_library.osl)
 endif
 
 .PHONY:			clean
