@@ -1,6 +1,7 @@
 /* -*- C -*- */
 /* args.c */
 /* erzeugt Freitag, 07. Juli 2023 12:05 (C) 2023 von Leander Jedamus */
+/* modifiziert Montag, 07. Oktober 2024 11:18 von Leander Jedamus */
 /* modifiziert Freitag, 23. Februar 2024 07:51 von Leander Jedamus */
 /* modifiziert Donnerstag, 22. Februar 2024 17:44 von Leander Jedamus */
 /* modifiziert Montag, 25. September 2023 07:39 von Leander Jedamus */
@@ -21,6 +22,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
+#include <string.h>
 #include <limits.h>
 
 #include "project.h"
@@ -56,7 +58,13 @@ int main(int argc, char *argv[]) {
   bindtextdomain(PROJECT, localedir);
   textdomain(PROJECT);
 
-  printf(_("%s V%s (C) %s by %s <%s>\n"), PROJECT, VERSION, YEARS, AUTHOR, EMAIL);
+  printf(_("%s V%s (C) %s by %s <%s>\n"), PROJECT, VERSION, YEARS, AUTHOR, AUTHOR_EMAIL);
+  if (strlen(MAINTAINER) > 0) {
+    printf(_("maintained by %s <%s>\n"), MAINTAINER, MAINTAINER_EMAIL);
+  }
+  if (strlen(LICENSE) > 0) {
+    printf(_("published under license \"%s\"\n"), LICENSE);
+  }
 
 #ifdef DEBUG  
   printf("%s\n",localedir);
