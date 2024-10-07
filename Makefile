@@ -1,4 +1,5 @@
 # erzeugt Samstag, 04. Juli 2015 14:04 (C) 2015 von Leander Jedamus
+# modifiziert Montag, 07. Oktober 2024 12:05 von Leander Jedamus
 # modifiziert Samstag, 24. August 2024 14:42 von Leander Jedamus
 # modifiziert Freitag, 16. August 2024 12:06 von Leander Jedamus
 # modifiziert Montag, 12. August 2024 09:41 von Leander Jedamus
@@ -60,6 +61,13 @@ DATE			:= $(shell date +\"%y%m%d\")
 DATETIME		:= $(shell date +\"%d.%m.%Y\ %H:%M\")
 PROJECT			:= $(shell cat project.txt)
 PROJECT_FILES		:= project.h version.h
+
+PREFIX			:= /usr/local
+BINDIR			:= $(PREFIX)/bin
+LIBDIR			:= $(PREFIX)/lib
+DATADIR			:= $(PREFIX)/share
+LOCALEDIR		:= $(DATADIR)/locale
+
 # PROJECT		:= va_args_so
 BACKUPDIR		:= $(PROJECT)
 TARFILE			:= $(BACKUPDIR).tar.gz
@@ -130,9 +138,9 @@ LDFLAGS			+= -L .# -s
 
 ifneq ($(link_switch),static)
   ifeq ($(machtype),MacOS)
-    LDFLAGS    		+= -L `pwd` -Xlinker -rpath -Xlinker `pwd` # for clang
+    LDFLAGS    		+= -L $(shell pwd) -Xlinker -rpath -Xlinker $(shell pwd) # for clang
   else
-    LDFLAGS		+= -Wl,--rpath=$(shell echo `pwd`) # for gcc
+    LDFLAGS		+= -Wl,--rpath=$(shell pwd) # for gcc
   endif
 endif
 
@@ -151,6 +159,8 @@ LDLIBS			+= # -lncurses
 ifeq ($(machtype),MacOS)
   LDFLAGS		+= -L /usr/local/lib
   LDLIBS		+= -lintl
+else
+  LDLIBS		+= # -lpopt # command line parsing
 endif
 
 define debug
@@ -180,6 +190,7 @@ CSOURCES		:= # put your c source files here \
 CDEPENDS		:= # here you add the .d files make from .c files
 CCDEPENDS		:= # here you add the .d files make from .cc files
 IS_IN_LIB		:= # here you add the .d files, which obj-files are in a library
+SHARED_LIBS		:= # put your shared libs here
 CCSOURCES.*		:= # put your c++ source files here. File types \
 			    "*.cc,*.cpp,*.c++,*.cxx,*.C" are recognized. \
 			    (will be used e.g. by "make depend")
@@ -197,9 +208,13 @@ FILES			+= distclean.sh
 FILES			+= zip.sh
 FILES			+= create_project.sh
 FILES			+= create_version.sh
+FILES			+= install_bin.sh install_lib.sh install_locale.sh
+FILES			+= bin_dist.sh
 FILES			+= project.txt
 FILES			+= version.txt
-FILES			+= author.txt email.txt years.txt
+FILES			+= author.txt author_email.txt license.txt
+FILES			+= maintainer.txt maintainer_email.txt
+FILES			+= updated.txt url.txt description.txt years.txt
 
 # use this for your c++ source files (uncomment for use with your c++-file):
 #CCSOURCES.cc		:= #
@@ -309,6 +324,7 @@ endif
   OBJS12		:= $(LIB1OBJS12)
   OBJS			+= $(OBJS12) $(OBJS1) $(LIB1OBJS13)
   LIBRARIES		+= $(LIBRARY12) $(LIBRARY1)
+  SHARED_LIBS		+= $(LIBRARY1)
 endif
 
 CMAINFILE		:= main.c
@@ -330,8 +346,19 @@ PROGRAM1		:= $(PROJECT)
 PROGRAMS		:= $(PROGRAM1) $(PROGRAM2)
 
 .PHONY:			all
-all::			$(PROJECT_FILES) $(PROGRAMS)
+all:			$(PROJECT_FILES) $(PROGRAMS)
 			@echo done.
+
+.PHONY:			install
+install:		$(PROJECT_FILES) $(PROGRAMS)
+			@sh ./install_bin.sh $(BINDIR) $(PROGRAM1) $(PROGRAM2)
+			@sh ./install_lib.sh $(LIBDIR) $(LIB2RARY)
+			@sh ./install_locale.sh $(LOCALEDIR) $(PROJECT).mo
+
+.PHONY:			bin_dist
+bin_dist:		$(PROJECT_FILES) $(PROGRAMS)
+			@sh ./bin_dist.sh $(PROGRAM1) $(PROJECT) $(SHARED_LIBS)
+#			@sh ./bin_dist.sh $(PROGRAM2) $(PROJECT) $(SHARED_LIBS)
 
 .PHONY:			strip
 strip:			$(PROGRAMS)
@@ -404,11 +431,11 @@ $(PRINTFILE):		$(FILES)
 .PHONY:			dummy
 dummy:
 
-project.h:		project.txt author.txt email.txt years.txt
+project.h:		project.txt author.txt author_email.txt license.txt maintainer.txt maintainer_email.txt url.txt description.txt years.txt create_project.sh
 			@echo "creating $@"
 			@./create_project.sh $@
 
-version.h:		version.txt author.txt
+version.h:		version.txt author.txt updated.txt create_version.sh
 			@echo "creating $@"
 			@./create_version.sh $@
 

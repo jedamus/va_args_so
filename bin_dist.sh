@@ -1,12 +1,13 @@
 #!/usr/bin/env sh
 
 # erzeugt Freitag, 04. Oktober 2024 19:01 (C) 2024 von Leander Jedamus
+# modifiziert Montag, 07. Oktober 2024 12:06 von Leander Jedamus
 # modifiziert Freitag, 04. Oktober 2024 22:17 von Leander Jedamus
 
 set -e
 
 if [ -z $2 ]; then
-  echo "you must provide a program name and then some shaed libraries."
+  echo "you must provide a program name and then some shared libraries."
   exit 1
 fi
 
