@@ -1,0 +1,1 @@
+This is a template program in C written using Makefiles
