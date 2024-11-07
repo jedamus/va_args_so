@@ -1,4 +1,5 @@
 # erzeugt Samstag, 04. Juli 2015 14:04 (C) 2015 von Leander Jedamus
+# modifiziert Donnerstag, 07. November 2024 10:20 von Leander Jedamus
 # modifiziert Montag, 07. Oktober 2024 19:01 von Leander Jedamus
 # modifiziert Samstag, 24. August 2024 14:42 von Leander Jedamus
 # modifiziert Freitag, 16. August 2024 12:06 von Leander Jedamus
@@ -215,6 +216,7 @@ FILES			+= version.txt
 FILES			+= author.txt author_email.txt license.txt
 FILES			+= maintainer.txt maintainer_email.txt
 FILES			+= updated.txt url.txt description.txt years.txt
+FILES			+= license.md
 
 # use this for your c++ source files (uncomment for use with your c++-file):
 #CCSOURCES.cc		:= #
